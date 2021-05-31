@@ -1,0 +1,32 @@
+{% extends ':default:layout.html.twig' %}
+
+{% set page_title = entityTypeDescription|capitalize ~ ': ' ~ unqualified_name %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    <div class="row">
+        <p>
+            Fully qualified class name: {{ fully_qualified_name }}<br>
+            {% if node_config_id is not null %}
+                {% if entity_type == 'data-source' %}
+                    {# This is a data source entity #}
+                    Data source configuration:
+                    <a href="{{ path('data_consolidation.custom_nodes.data_source.view', {'custom_node_config_id': node_config_id}) }}">View</a>
+                {% else %}
+                    {# This is a diagram entity #}
+                    Diagram configuration:
+                    <a href="{{ path('data_consolidation.custom_nodes.diagram.view', {'custom_node_config_id': node_config_id}) }}">View</a>
+                {% endif %}
+            {% else %}
+                <span class="text-danger">N/A</span>
+            {% endif %}
+            <br>
+            Properties:
+        </p>
+        <ul>
+            {% for property in properties %}
+                <li>{{ property }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

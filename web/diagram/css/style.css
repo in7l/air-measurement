@@ -1,0 +1,121 @@
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: geometricPrecision;
+}
+
+.line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+}
+
+.dot {
+	stroke-width: 1.5px;
+	pointer-events: fill;
+}
+
+.line-field {
+	pointer-events: none;
+}
+
+#measurement-tooltip {
+	position: absolute;
+	text-align: center;
+	width: 150px;
+	padding: 5px;
+	font: 12px sans-serif;
+	background: white;
+	border: 1px solid black;
+	border-radius: 8px;
+	z-index: 2;
+}
+
+#legend-tooltip {
+	position: absolute;
+	width: 150px;
+	padding: 5px;
+	font: 12px sans-serif;
+	background: white;
+	border: 1px solid black;
+	border-radius: 8px;
+	z-index: 1;
+}
+
+.legend-value {
+	display: block;
+	cursor: pointer;
+}
+
+.btn-group-vertical {
+	width: 100%;
+}
+
+.menu-checkbox {
+	margin-left: 10px;
+}
+
+#legend-tooltip-trigger:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#diagram-container {
+	height: 1px;
+	width: 100%;
+	padding-top: 1%;
+	position: relative;
+	border: 1px solid black;
+	overflow: hidden;
+}
+
+#diagram-container svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* Remove bootstrap column gutters for the menu selection elements */
+.menu-selection {
+	padding: 0;
+}
+
+#controls-selection div, #controls-selection button {
+	width: 100%;
+}
+
+svg {
+	font-size: 10px;
+}
+
+/* Line chart context and brush-specific adjustments */
+svg .brush .extent {
+	stroke: #fff;
+	fill-opacity: .125;
+	shape-rendering: crispEdges;
+}
+
+svg #legendGroup .legend-value-group:hover{
+	text-decoration: underline;
+	cursor: pointer;
+	fill: #0066FF;
+}
+
+/* Scale the font-size of the svg. Use widths based on bootstrap's xs and sm classes. */
+/* Default font-size. To be used in extra-small devices */
+svg text {
+	font-size: 2.5em;
+}
+/* Font-size to be used in small devices */
+@media (min-width: 768px) {
+	svg text {
+		font-size: 1.5em;
+	}
+}
+/* Font size to be used in medium-sized and larger devices */
+@media (min-width: 992px) {
+	svg text {
+		font-size: 1.2em;
+	}
+}

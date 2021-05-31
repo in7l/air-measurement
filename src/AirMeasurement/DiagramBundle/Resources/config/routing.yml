@@ -1,0 +1,11 @@
+air_measurement_diagram_homepage:
+    path:     /diagram
+    defaults: { _controller: AirMeasurementDiagramBundle:Diagram:diagram }
+
+air_measurement_diagram_simple_status:
+    path:     /
+    defaults: { _controller: AirMeasurementDiagramBundle:Diagram:status }
+
+air_measurement_fetch_measurement:
+    path:     /measurement
+    defaults: { _controller: AirMeasurementDiagramBundle:Diagram:measurement }

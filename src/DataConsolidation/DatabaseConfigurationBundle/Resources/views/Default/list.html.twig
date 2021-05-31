@@ -1,0 +1,23 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Existing database configurations' %}
+
+{# Define a twig macro for obtaining a database identifier #}
+{% macro database_identifier(driver, host, port, dbname, alias) %}
+    {# Only display the ':[PORT]' component if an actual port was specified #}
+    {{ alias }} ({{ driver }}://{{ host }}{{ (port is not null) ? ':' ~ port }}/{{ dbname }})
+{% endmacro %}
+{# Import the macros defined in this twig template #}
+{% import _self as db %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [] %}
+{# Gp through each item in the database configurations and display it as a menu item link #}
+{% for db_conf in database_configurations %}
+    {% set configuration_menu_items = configuration_menu_items|merge([
+        {
+            'url': "#{ path('data_consolidation.database_configuration.view', {'connection_alias': db_conf.connectionAlias}) }",
+            'name': "#{ db.database_identifier(db_conf.driver, db_conf.host, db_conf.port, db_conf.dbName, db_conf.connectionAlias) }"
+        }
+    ]) %}
+{% endfor %}

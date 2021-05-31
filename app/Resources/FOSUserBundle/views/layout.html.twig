@@ -1,0 +1,8 @@
+{% extends ':default:layout.html.twig' %}
+
+{% set page_title = 'User authentication' %}
+
+{% block bootstrap_container %}
+	{{ parent() }}
+    {% block fos_user_content %}{% endblock %}
+{% endblock %}

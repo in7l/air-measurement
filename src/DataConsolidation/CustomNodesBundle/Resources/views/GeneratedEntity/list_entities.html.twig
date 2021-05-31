@@ -1,0 +1,15 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Existing ' ~ entityTypeDescription ~ ' for entity manager: ' ~ sanitizedEntityManagerName %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [] %}
+{# Gp through each item in the custom node configurations and display it as a menu item link #}
+{% for generatedEntity in generatedEntities %}
+    {% set configuration_menu_items = configuration_menu_items|merge([
+        {
+            'url': "#{ path('data_consolidation.custom_nodes.generated_entities.view', {'entity_type': entityType, 'sanitized_entity_manager_name': sanitizedEntityManagerName, 'entity_name': generatedEntity.name }) }",
+            'name': "#{ generatedEntity.name }"
+        }
+    ]) %}
+{% endfor %}

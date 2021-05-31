@@ -1,0 +1,138 @@
+# Routing related to NodeConfig objects (data source node configurations) actions.
+data_consolidation.custom_nodes.index:
+    path:     /
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Default:index }
+data_consolidation.custom_nodes.data_source.index:
+    path:     /data-source/
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:index }
+data_consolidation.custom_nodes.data_source.add:
+    path:     /data-source/add
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:add }
+data_consolidation.custom_nodes.data_source.list:
+    path:     /data-source/list
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:list }
+data_consolidation.custom_nodes.data_source.view:
+    path:     /data-source/view/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:view }
+data_consolidation.custom_nodes.data_source.edit:
+    path:     /data-source/edit/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:edit }
+data_consolidation.custom_nodes.data_source.delete:
+    path:     /data-source/delete/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:delete }
+data_consolidation.custom_nodes.data_source.import:
+    path:     /data-source/import
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:import }
+data_consolidation.custom_nodes.data_source.generate_entities:
+    path:     /data-source/generate-entities/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:generateEntities }
+data_consolidation.custom_nodes.data_source.test:
+    path:     /data-source/test
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSource:test }
+# Routing related to DiagramConfig objects actions.
+data_consolidation.custom_nodes.diagram.index:
+    path:     /diagram/
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:index }
+data_consolidation.custom_nodes.diagram.add:
+    path:     /diagram/add
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:add }
+data_consolidation.custom_nodes.diagram.list:
+    path:     /diagram/list
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:list }
+data_consolidation.custom_nodes.diagram.view:
+    path:     /diagram/view/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:view }
+data_consolidation.custom_nodes.diagram.edit:
+    path:     /diagram/edit/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:edit }
+data_consolidation.custom_nodes.diagram.delete:
+    path:     /diagram/delete/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:delete }
+data_consolidation.custom_nodes.diagram.generate_entities:
+    path:     /diagram/generate-entities/{custom_node_config_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:Diagram:generateEntities }
+# Routing related to generated Doctrine entities from NodeConfig and DiagramConfig objects.
+data_consolidation.custom_nodes.generated_entities.list:
+    path:     /generated-entity/{entity_type}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:list }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.list_entities:
+    path:     /generated-entity/list/{entity_type}/{sanitized_entity_manager_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:listEntities }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.view:
+    path:     /generated-entity/view/{entity_type}/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:view }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.delete:
+    path:     /generated-entity/delete/{entity_type}/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:delete }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.update_db_schema:
+    path:     /generated-entity/update-db-schema/{entity_type}/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:updateDatabaseSchema }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.delete_db_schema:
+    path:     /generated-entity/delete-db-schema/{entity_type}/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:deleteDatabaseSchema }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.list_content:
+    path:     /generated-entity/content/{entity_type}/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:listContent }
+    requirements:
+        entity_type: data-source|diagram
+data_consolidation.custom_nodes.generated_entities.view_content:
+    path:     /generated-entity/content/{entity_type}/{sanitized_entity_manager_name}/{entity_name}/view/{identifier_name}/{identifier_value}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:GeneratedEntity:viewContent }
+    requirements:
+        entity_type: data-source|diagram
+# Routing related to DataSourceToDiagramMapping objects.
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.index:
+    path:     /mapping/
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:index }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.add:
+    path:     /mapping/add
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:add }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.list:
+    path:     /mapping/list
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:list }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.list_for_diagram:
+    path:     /mapping/list/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:listForDiagram }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.view:
+    path:     /mapping/view/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:view }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.edit:
+    path:     /mapping/edit/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:edit }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.delete:
+    path:     /mapping/delete/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:delete }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.map:
+    path:     /mapping/map/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:map }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.consolidate_data:
+    path:     /mapping/consolidate-data/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:consolidateData }
+data_consolidation.custom_nodes.data_source_to_diagram_mapping.interpolate:
+    path:     /mapping/interpolate/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:DataSourceToDiagramMapping:interpolate }
+# Routing related to JsonToDiagramMapping objects.
+data_consolidation.custom_nodes.json_to_diagram_mapping.index:
+    path:     /json-mapping/
+    defaults: { _controller: DataConsolidationCustomNodesBundle:JsonToDiagramMapping:index }
+data_consolidation.custom_nodes.json_to_diagram_mapping.add:
+    path:     /json-mapping/add
+    defaults: { _controller: DataConsolidationCustomNodesBundle:JsonToDiagramMapping:add }
+data_consolidation.custom_nodes.json_to_diagram_mapping.list:
+    path:     /json-mapping/list
+    defaults: { _controller: DataConsolidationCustomNodesBundle:JsonToDiagramMapping:list }
+data_consolidation.custom_nodes.json_to_diagram_mapping.view:
+    path:     /json-mapping/view/{mapping_id}
+    defaults: { _controller: DataConsolidationCustomNodesBundle:JsonToDiagramMapping:view }

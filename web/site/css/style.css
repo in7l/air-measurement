@@ -1,0 +1,147 @@
+body {
+	font-family: sans-serif;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.page-header {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.page-header h1 {
+	margin-top: 5px;
+	margin-bottom: 0px;
+	font-size: 20px;
+}
+
+.measurement {
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 0px 20px 20px 20px;
+}
+
+.measurement header {
+	padding: 0px;
+}
+
+.measurement h2 {
+	font-size: 18px;
+}
+
+.nav-tabs {
+	margin-bottom: 15px;
+}
+
+.flash-message {
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 2px 5px 2px 5px;
+}
+
+.flash-notice {
+	background-color: #94b84d;
+}
+
+.flash-warning {
+	background-color: #ff8533;
+}
+
+.flash-error {
+	background-color: #d63333
+}
+
+/* Used for embedded forms */
+fieldset.fieldset-border {
+	border: 1px solid #999999;
+	border-radius: 4px;
+	padding: 15px;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+fieldset.fieldset-border legend {
+	color: #888888;
+	font-weight: bold;
+	margin:15px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: auto;
+	border-bottom: 0px;
+}
+
+/* fieldset within a fieldset */
+fieldset.fieldset-border.fieldset-options legend {
+	font-size: 1em;
+	cursor: pointer;
+}
+
+/* Configuration menu */
+ul.configuration-menu {
+	list-style-type: none;
+}
+ul.configuration-menu li {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+/* Nested groups in configuration menus */
+ul.configuration-menu ul.menu-item-group {
+	list-style-type: none;
+	border-bottom: 1px solid #ddd;
+}
+
+/* target entity manager and NodeConfigField embedded forms.
+Also FieldMapping embedded forms. */
+.config-embedded-form > .form-group, .field-mapping-embedded-form > .form-group {
+	margin: 0px 0px 15px 0px;
+}
+
+.target-entity-manager-group .delete-field-link {
+	margin-top: 15px;
+}
+
+.target-entity-manager-group .btn {
+	margin-top: 15px;
+}
+
+/* Remove negative margins for rows in the bootstrap_base template */
+.bootstrap-container .row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+/* Add a border between FieldMapping embedded forms */
+div.field-mapping-group {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+/* Add some spacing between form flow buttons */
+.craue_formflow_buttons button {
+	margin-left: 15px;
+}
+/* Form flow current step */
+.craue_formflow_current_step {
+	font-weight: bold;
+}
+
+/* Form flow steps div */
+div.row.form-flow-steps {
+	margin-bottom: 20px;
+}
+
+/* Rules for devices larger than extra-small */
+@media (min-width: 768px) {
+	.page-header {
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+
+	.page-header h1 {
+		font-size: 30px;
+	}
+
+	.measurement h2 {
+		font-size: 20px;
+	}
+}

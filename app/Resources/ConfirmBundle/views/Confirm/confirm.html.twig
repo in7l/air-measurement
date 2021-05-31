@@ -1,0 +1,20 @@
+{% extends "ConfirmBundle::layout.html.twig" %}
+
+{# Place the form submit button on the leftmost side of the form, since it looks more natural that way #}
+{% form_theme form _self %}
+{% block submit_row -%}
+    {% spaceless %}
+        <div class="form-group">
+            <div class="{{ block('form_group_class') }}">
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock submit_row %}
+
+{% set page_title = options.message %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    {{ form(form) }}
+{% endblock %}

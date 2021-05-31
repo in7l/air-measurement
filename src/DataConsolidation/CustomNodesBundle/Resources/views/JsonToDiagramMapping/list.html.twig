@@ -1,0 +1,22 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Existing JSON to diagram mappings' ~ (diagram_name|default ? (' for diagram: ' ~ diagram_name)) %}
+
+{# Add menu item links to be displayed #}
+{% if display_add_link|default %}
+    {% set configuration_menu_items = [
+        {'route': 'data_consolidation.custom_nodes.json_to_diagram_mapping.add', 'name': 'Add a new JSON to diagram mapping', 'glyphicon': 'glyphicon-plus'},
+    ] %}
+{% else %}
+    {% set configuration_menu_items = [] %}
+{% endif %}
+
+{# Gp through each item in the JSON to diagram mappings array and display it as a menu item link #}
+{% for mapping in json_to_diagram_mappings %}
+    {% set configuration_menu_items = configuration_menu_items|merge([
+    {
+        'url': "#{ path('data_consolidation.custom_nodes.json_to_diagram_mapping.view', {'mapping_id': mapping.id}) }",
+        'name': "#{ mapping.sourceDisplayName }"
+    }
+    ]) %}
+{% endfor %}

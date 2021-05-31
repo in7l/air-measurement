@@ -1,0 +1,9 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'JSON to diagram mappings configuration' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [
+    {'route': 'data_consolidation.custom_nodes.json_to_diagram_mapping.add', 'name': 'Add a new JSON to diagram mapping', 'glyphicon': 'glyphicon-plus'},
+    {'route': 'data_consolidation.custom_nodes.json_to_diagram_mapping.list', 'name': 'View existing JSON to diagram mappings', 'glyphicon': 'glyphicon-wrench'},
+] %}

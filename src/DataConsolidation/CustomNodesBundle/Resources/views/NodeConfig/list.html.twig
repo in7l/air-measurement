@@ -1,0 +1,15 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Existing data source node configurations' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [] %}
+{# Gp through each item in the custom node configurations and display it as a menu item link #}
+{% for nodeConf in node_configurations %}
+    {% set configuration_menu_items = configuration_menu_items|merge([
+    {
+        'url': "#{ path('data_consolidation.custom_nodes.data_source.view', {'custom_node_config_id': nodeConf.id}) }",
+        'name': "#{ nodeConf.name }"
+    }
+    ]) %}
+{% endfor %}

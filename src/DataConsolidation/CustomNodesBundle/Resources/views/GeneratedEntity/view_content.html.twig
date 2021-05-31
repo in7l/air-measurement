@@ -1,0 +1,20 @@
+{% extends ':default:layout.html.twig' %}
+
+{% set page_title = 'Entry of ' ~ entityTypeDescription ~ ': ' ~ entity_name %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    <div class="row">
+        {% if content_entry_info %}
+            <p>
+                {% for propertyName, propertyValue in content_entry_info %}
+                    {{ propertyName }}: {{ propertyValue }}<br>
+                {% endfor%}
+            </p>
+        {% else %}
+            <p>
+                There are no properties to display.
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

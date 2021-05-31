@@ -1,0 +1,20 @@
+# This file is a "template" of what your doctrine_extra_databases.yml file should look like
+# Doctrine extra databases configuration
+doctrine:
+    dbal:
+        connections:
+            data_source.db_1:
+                  driver:   "%data_source.db_1.driver%"
+                  host:     "%data_source.db_1.host%"
+                  port:     "%data_source.db_1.port%"
+                  dbname:   "%data_source.db_1.dbname%"
+                  user:     "%data_source.db_1.user%"
+                  password: "%data_source.db_1.password%"
+                  charset:  UTF8
+    orm:
+        entity_managers:
+            data_source.db_1:
+                connection: data_source.db_1
+#                mappings:
+#                    DataConsolidationCustomNodesBundle:
+#                        prefix: DataConsolidation\CustomNodesBundle\Entity\Custom\DataSourceDb1

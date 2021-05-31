@@ -1,0 +1,61 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Content for ' ~ entityTypeDescription ~ ': ' ~ entity_name %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [] %}
+{# Gp through each item in the content info and display it as a menu item link #}
+{% for contentEntryInfo in content_info %}
+    {% if use_property_name_prefix %}
+        {# Prepend the property names to the content list entry's text. #}
+        {% set propertyComponents = [] %}
+        {% for propertyName, propertyValue in contentEntryInfo.contentListFields %}
+            {# Add an array element in format 'propertyName: propertyValue'. #}
+            {% set propertyComponents = propertyComponents|merge([
+                propertyName ~ ': ' ~ propertyValue
+            ]) %}
+        {% endfor %}
+        {# Merge the property components into a single string. #}
+        {% set name = propertyComponents|join('; ') %}
+    {% else %}
+        {# Do not prepend the property names to the content list entry's text. #}
+        {# Merge the content list fields into a single string, #}
+        {% set name = contentEntryInfo.contentListFields|join('; ') %}
+    {% endif %}
+
+    {# Add a route using an identifier, if available #}
+    {% if contentEntryInfo.identifier and contentEntryInfo.identifierFieldName %}
+        {% set url = path('data_consolidation.custom_nodes.generated_entities.view_content', {'entity_type': entity_type, 'sanitized_entity_manager_name': sanitized_entity_manager_name, 'entity_name': entity_name, 'identifier_name': contentEntryInfo.identifierFieldName, 'identifier_value': contentEntryInfo.identifier}) %}
+    {% else %}
+        {% set url = null %}
+    {% endif %}
+
+    {% set configuration_menu_items = configuration_menu_items|merge([
+        {
+            'url': url,
+            'name': name
+        }
+    ]) %}
+{% endfor %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    {% block pagination_block %}
+        {% if pagination %}
+            <div class="row">
+                <nav class="pagination">
+                    <ul class="list-inline">
+                        <li>Page:</li>
+                        {% for page in pagination %}
+                            {% if page.url %}
+                                <li><a href="{{ page.url }}">{{ page.name }}</a></li>
+                            {% else %}
+                                <li>{{ page.name }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

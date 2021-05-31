@@ -1,0 +1,36 @@
+{% extends ':default:form.html.twig' %}
+
+{# Macro for printing a FieldMapping embedded form #}
+{% macro field_mapping_form_row(fieldMapping) %}
+    <div class="form-group field-group field-mapping-group">
+        {{ form_row(fieldMapping) }}
+    </div>
+{% endmacro %}
+
+{# Macro for printing data source to data mapping form. #}
+{% macro data_source_to_diagram_mapping_form(mappingForm) %}
+    {% if mappingForm is iterable %}
+        {% for key, formElement in mappingForm.children %}
+            {% if key == 'fieldMappings' %}
+                <fieldset>
+                    <legend>Field mappings:</legend>
+                    {# Add an escaped data-prototype used for adding more fields dynamically #}
+                    <div id="mapping-fields" class="field-mapping-embedded-form">
+                        {% for fieldMapping in formElement %}
+                            {{ _self.field_mapping_form_row(fieldMapping) }}
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            {% else %}
+                {{ form_row(formElement) }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{# Import the macros for use in the current template #}
+{% import _self as forms %}
+
+{% block form_elements %}
+    {{ forms.data_source_to_diagram_mapping_form(form) }}
+{% endblock %}

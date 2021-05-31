@@ -1,0 +1,11 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Data source nodes configuration' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [
+    {'route': 'data_consolidation.custom_nodes.data_source.add', 'name': 'Add a new data source node configuration', 'glyphicon': 'glyphicon-plus'},
+    {'route': 'data_consolidation.custom_nodes.data_source.import', 'name': 'Import a data source node configuration from existing database schema', 'glyphicon': 'glyphicon-open-file'},
+    {'route': 'data_consolidation.custom_nodes.data_source.list', 'name': 'View existing data source node configurations', 'glyphicon': 'glyphicon-wrench'},
+    {'route': 'data_consolidation.custom_nodes.generated_entities.list', 'route_params': {'entity_type': 'data-source'}, 'name': 'View generated doctrine entities', 'glyphicon': 'glyphicon-list-alt'}
+] %}

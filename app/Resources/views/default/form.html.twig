@@ -1,0 +1,23 @@
+{% extends ':default:layout.html.twig' %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    {% block pre_form_block %}
+    {% endblock %}
+    <div class="row">
+        {% block form_block %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {% block form_elements %}
+                {{ form_row(form) }}
+            {% endblock %}
+            {% block form_submit_block %}
+                {# According to Symfony Forms best practices, it is best to add the submit button directly to the template #}
+                {% if submit_value is defined %}
+                    <input type="submit" value="{{ submit_value }}" class="btn btn-default pull-right" />
+                {% endif %}
+            {% endblock %}
+            {{ form_end(form) }}
+        {% endblock %}
+    </div>
+{% endblock %}

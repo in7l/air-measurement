@@ -1,0 +1,9 @@
+services:
+    data_consolidation.database_configurator:
+        class: DataConsolidation\DatabaseConfigurationBundle\Utils\DatabaseConfigurator
+        calls:
+            - [setDoctrineEntityHelper, [@data_consolidation.custom_nodes.doctrine_entity_helper]]
+    data_consolidation.command_tools:
+        class: DataConsolidation\DatabaseConfigurationBundle\Utils\CommandTools
+        calls:
+            - [setContainer, [@service_container]]

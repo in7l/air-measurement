@@ -1,0 +1,54 @@
+{% extends ':default:layout.html.twig' %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    <p>
+        ID: {{ node_configuration.id }}<br>
+        Name: {{ node_configuration.name }}<br>
+        Database table name: {{ node_configuration.tableName ? node_configuration.tableName : node_configuration.name }}
+    </p>
+    <h4>Target entity managers:</h4>
+    <ul>
+        {% for entityManager in node_configuration.targetEntityManagers %}
+            <li><a href="{{ path('data_consolidation.database_configuration.view', {'connection_alias': entityManager }) }}">{{ entityManager }}</a></li>
+        {% endfor %}
+    </ul>
+    <h4>Fields:</h4>
+    <ul>
+        {% for field in node_configuration.fields %}
+            <li>Field id: {{ field.id }}<ul>
+                <li>Name: {{ field.name }}</li>
+                <li>Type: {{ field.type }}</li>
+                {# Get the node config options object #}
+                {% set nodeConfigOptions = field.getOptions(true) %}
+                <li>Active options: <ul>
+                    {% if nodeConfigOptions.primaryKey %}
+                        <li>Primary key</li>
+                        <li>Generated value strategy: {{ nodeConfigOptions.strategy|default('NONE') }}</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.nullable %}
+                        <li>NULL allowed</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.unique %}
+                        <li>Unique</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.visibleInContentList %}
+                        <li>Visible in content list</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.columnName is not null %}
+                        <li>Column name: {{ nodeConfigOptions.columnName }}</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.precision is not null %}
+                        <li>Precision: {{ nodeConfigOptions.precision }}</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.scale is not null %}
+                        <li>Scale: {{ nodeConfigOptions.scale }}</li>
+                    {% endif %}
+                    {% if nodeConfigOptions.length is not null %}
+                        <li>Length: {{ nodeConfigOptions.length }}</li>
+                    {% endif %}
+                </ul></li>
+            </ul></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

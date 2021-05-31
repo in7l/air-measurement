@@ -1,0 +1,10 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Database configuration' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [
+{'route': 'data_consolidation.database_configuration.add', 'name': 'Add a new database configuration'},
+{'route': 'data_consolidation.database_configuration.list', 'name': 'View existing database configurations'},
+{'route': 'data_consolidation.database_configuration.clear_cache', 'name': 'Clear cache'}
+] %}

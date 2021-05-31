@@ -1,0 +1,19 @@
+air_measurement_admin_action_list:
+    path:     /admin/
+    defaults: { _controller: AirMeasurementAdminBundle:Default:index }
+
+air_measurement_admin_conditions_list:
+    path:     /admin/conditions
+    defaults: { _controller: AirMeasurementAdminBundle:Default:conditionsIndex }
+
+air_measurement_admin_conditions_add:
+    path:     /admin/conditions/add
+    defaults: { _controller: AirMeasurementAdminBundle:Default:addCondition }
+
+air_measurement_admin_conditions_edit:
+    path:     /admin/conditions/edit/{condition_id}
+    defaults: { _controller: AirMeasurementAdminBundle:Default:editCondition }
+
+air_measurement_admin_conditions_view:
+    path:     /conditions/view/{sensor_id}
+    defaults: { _controller: AirMeasurementAdminBundle:Default:viewCondition }

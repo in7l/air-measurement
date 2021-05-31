@@ -1,0 +1,24 @@
+data_consolidation.database_configuration.index:
+    path:     /
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:index }
+data_consolidation.database_configuration.list:
+    path:     /list
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:list }
+data_consolidation.database_configuration.add:
+    path:     /add
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:add }
+data_consolidation.database_configuration.view:
+    path:     /view/{connection_alias}
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:view }
+data_consolidation.database_configuration.edit:
+    path:     /edit/{connection_alias}
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:edit }
+data_consolidation.database_configuration.change_password:
+    path:     /change-password/{connection_alias}
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:changePassword }
+data_consolidation.database_configuration.delete:
+    path:     /delete/{connection_alias}
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:delete }
+data_consolidation.database_configuration.clear_cache:
+    path:     /clear-cache
+    defaults: { _controller: DataConsolidationDatabaseConfigurationBundle:Default:clearCache }

@@ -1,0 +1,70 @@
+{% extends 'DataConsolidationCustomNodesBundle:default:mapping_form_flow.html.twig' %}
+
+{% block pre_form_block %}
+    {{ parent() }}
+    {# Print instructions when on the form flow step used for defining field mappings #}
+    {% if flow.currentStepNumber == 3 %}
+        <div>
+            <p id="json-instructions-trigger">
+                <a href="#">Instructions how to define the source getters</a>
+            </p>
+            <ol id="json-instructions">
+                <li><span>Accessing a property directly in the result object:</span>
+                    <pre>
+// JSON response:
+{
+    "test_field": 12
+}
+
+// Source getter definition to access "test_field":
+this.test_field</pre>
+                </li>
+                <li><span>Accessing a property nested in another object:</span>
+                    <pre>
+// JSON response:
+{
+    "values": {
+        "test_field": 12,
+        "another_field": 5
+    }
+}
+
+// Source getter definition to access "test_field":
+this.values.test_field</pre>
+                </li>
+                <li><span>Accessing a property nested in an array of values:</span>
+                    <pre>
+// JSON response:
+{
+    "measurements": [
+        {
+            "values": {
+                "test_field": 12,
+                "another_field": 5
+            }
+        },
+        {
+            "values": {
+                "test_field": 7,
+                "another_field": 2
+            }
+        }
+    ]
+}
+
+// Source getter definition to access "test_field" of the first measurement:
+this.measurements[0].values.test_field</pre>
+                </li>
+            </ol>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# If this is the form flow step used for defining field mappings #}
+    {% if flow.currentStepNumber == 3  %}
+        {# Add javascript to hide the list of instructions by default. #}
+        <script src="{{ asset('site/js/json_to_diagram_mapping.js') }}"></script>
+    {% endif %}
+{% endblock %}

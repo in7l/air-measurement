@@ -1,0 +1,33 @@
+{% extends ':default:layout.html.twig' %}
+
+{% set page_title = 'Home page'  %}
+
+{#{% block bootstrap_container %}#}
+    {#{{ parent() }}#}
+
+    {#<div class="row">#}
+        {#<article class="measurement col-xs-12 col-sm-6 col-md-4">#}
+            {#<header>#}
+                {#<h2 id="measurement-description">Retrieving latest measurement</h2>#}
+            {#</header>#}
+
+            {#<section id="measurement-quality">#}
+            {#</section>#}
+            {#<section id="measurement-date">#}
+            {#</section>#}
+            {#<section id="measurement-n">#}
+            {#</section>#}
+            {#<section id="measurement-pa">#}
+            {#</section>#}
+            {#<section id="measurement-mg">#}
+            {#</section>#}
+            {#<section id="last-fetched">#}
+            {#</section>#}
+        {#</article>#}
+    {#</div>#}
+{#{% endblock %}#}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('site/js/status.js') }}" charset="utf-8"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Air quality conditions' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [
+{'route': 'air_measurement_admin_conditions_add', 'name': 'Add new conditions'}
+] %}
+
+{% block configuration_menu %}
+    {{ parent() }}
+    {% for condition in conditions %}
+        <li>
+            <a href="{{ path('air_measurement_admin_conditions_edit', {'condition_id': condition.id}) }}">Edit conditions #{{ condition.id }} (sensor id "{{ condition.sensor_id }}")</a>
+            |
+            <a href="{{ path('air_measurement_admin_conditions_view', {'sensor_id': condition.sensor_id}) }}">View as JSON</a>
+        </li>
+    {% endfor %}
+{% endblock %}

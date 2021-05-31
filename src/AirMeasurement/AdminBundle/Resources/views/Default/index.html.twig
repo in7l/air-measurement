@@ -1,0 +1,11 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Administrative panel' %}
+
+{# Add menu item links to be displayed #}
+{# The values set here are temporary until the menu can be built dynamically in issue #33 #}
+{% set configuration_menu_items = [
+    {'route': 'air_measurement_admin_conditions_list', 'name': 'Air quality conditions'},
+    {'route': 'data_consolidation.database_configuration.index', 'name': 'Database configuration'},
+    {'route': 'data_consolidation.custom_nodes.index', 'name': 'Custom nodes configuration'}
+] %}

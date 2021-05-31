@@ -1,0 +1,5 @@
+parameters:
+    # Default number of measurement data entries to be shown in the data fetcher API on a single page.
+    default_entries_per_page: 500
+    # Maximum number of measurement data entries to be shown in the data fetcher API on a single page.
+    maximum_entries_per_page: 2000

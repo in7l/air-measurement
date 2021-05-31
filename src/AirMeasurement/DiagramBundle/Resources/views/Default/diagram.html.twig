@@ -1,0 +1,83 @@
+{% extends ':default:layout.html.twig' %}
+
+{# The diagram requires jQuery UI #}
+{% set include_jquery_ui = true %}
+
+{% set page_title = 'Air quality measurement diagram' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Datetime picker -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('diagram/css/jquery.datetimepicker.css') }}">
+    <!-- Custom stylesheet for the diagram -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('diagram/css/style.css') }}">
+{% endblock %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+
+    <div class="row">
+        <nav id="controls-selection" class="col-xs-2 col-sm-1 menu-selection">
+            <div class="btn-group" id="fitToScreen">
+                <button type="button" class="btn btn-default" name="fitToScreen" title="Fit chart to screen">
+                    <span class="glyphicon glyphicon-fullscreen"></span>
+                </button>
+            </div>
+        </nav>
+        <nav id="filters-selection" class="col-xs-10 col-sm-11 menu-selection">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group dropdown" id="sensorsMenu">
+                    <button type="button" class="btn btn-default dropdown-toggle filter" data-toggle="dropdown" aria-expanded="true" name="sensors">
+                        Sensors
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu no-auto-collapse" role="menu" aria-labelledby="sensorsMenu">
+                    </ul>
+                </div>
+
+                <div class="btn-group dropdown" id="valuesMenu">
+                    <button type="button" class="btn btn-default dropdown-toggle filter" data-toggle="dropdown" aria-expanded="true" name="values">
+                        Values
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu no-auto-collapse" role="menu" aria-labelledby="valuesMenu">
+                    </ul>
+                </div>
+
+                <div class="btn-group dropdown" id="timesMenu">
+                    <button type="button" class="btn btn-default dropdown-toggle filter" data-toggle="dropdown" aria-expanded="true" name="times">
+                        Time range
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-right no-auto-collapse" role="menu" aria-labelledby="timesMenu">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Diagram container -->
+        <div id="diagram-container"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- D3js library -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!-- Datetime picker -->
+    <script src="{{ asset('diagram/js/jquery.datetimepicker.js') }}"></script>
+    <!-- Diagram generator files -->
+    <script src="{{ asset('diagram/js/classes/util.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/data_generator.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/data_fetcher.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/filters.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/legend.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/tooltip.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/zoom_behavior.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/line_chart_context.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/line_chart.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/classes/measurement_diagram.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('diagram/js/site.js') }}" charset="utf-8"></script>
+{% endblock %}

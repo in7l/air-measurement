@@ -1,0 +1,42 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Existing entity managers associated with ' ~ entityTypeDescription %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [] %}
+{# Gp through each item in the custom node configurations and display it as a menu item link #}
+{% for entityManager in entityManagers %}
+    {# Define the second menu item for this entity manager depending on whether there is a db connection configuration or not. #}
+    {% if entityManager.name|default and entityManager.name != 'default' %}
+        {# Got a valid database configuration that is editable by the user. The default db connection cannot be edited. #}
+        {% set database_configuration_menu_item = {
+            'url': "#{ path('data_consolidation.database_configuration.view', {'connection_alias': entityManager.name}) }",
+            'name': "DB Connection configuration",
+            'glyphicon': 'glyphicon-wrench'
+        } %}
+    {% else %}
+        {# Missing database configuration or one that is inaccessible for editing by the user. #}
+        {% set database_configuration_menu_item = {
+            'name': "Missing or inaccessible DB Connection configuration",
+            'glyphicon': 'glyphicon-warning-sign'
+        } %}
+    {% endif %}
+
+    {# Create a menu item for this entity manager #}
+    {% set entity_manager_menu_items = {
+        'group': [
+            {
+                'url': "#{ path('data_consolidation.custom_nodes.generated_entities.list_entities', {'entity_type': entityType, 'sanitized_entity_manager_name': entityManager.sanitized_name}) }",
+                'name': "#{ entityManager.sanitized_name } doctrine entities",
+                'glyphicon': 'glyphicon-folder-open'
+            },
+            database_configuration_menu_item
+        ],
+        'groupClass': 'list-inline'
+    } %}
+
+    {# Merge the entity manager menu items to the common list of configuration menu items. #}
+    {% set configuration_menu_items = configuration_menu_items|merge([
+        entity_manager_menu_items
+    ]) %}
+{% endfor %}

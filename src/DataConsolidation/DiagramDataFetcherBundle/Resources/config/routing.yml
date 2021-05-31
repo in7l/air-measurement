@@ -1,0 +1,11 @@
+data_consolidation.diagram_data_fetcher.list:
+    path:     /list
+    defaults: { _controller: DataConsolidationDiagramDataFetcherBundle:Default:list }
+data_consolidation.diagram_data_fetcher.get_content:
+    path:     /get-content/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationDiagramDataFetcherBundle:Default:getContent }
+    requirements:
+        _format: json
+data_consolidation.diagram_data_fetcher.show_diagram:
+    path:     /show-diagram/{sanitized_entity_manager_name}/{entity_name}
+    defaults: { _controller: DataConsolidationDiagramDataFetcherBundle:Default:showDiagram }

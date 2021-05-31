@@ -1,0 +1,81 @@
+{% extends ':default:layout.html.twig' %}
+
+{# Define a macro for printing a single URL menu item #}
+{% macro list_url_item(url, value, glyphicon_class) %}
+    {% if glyphicon_class|default %}
+        {# Add the glyphicon before the value. #}
+        <li><a href="{{ url }}"><span class="glyphicon {{ glyphicon_class }}"></span> {{ value }}</a></li>
+    {% else %}
+        {# No glyphicon to be displayed. #}
+        <li><a href="{{ url }}">{{ value }}</a></li>
+    {% endif %}
+{% endmacro %}
+
+{# Define a macro for printing a single regular (non-URL) menu item #}
+{% macro list_regular_item(value, glyphicon_class) %}
+    {% if glyphicon_class|default %}
+        {# Add the glyphicon before the value. #}
+        <li><span class="glyphicon {{ glyphicon_class }}"></span> {{ value }}</li>
+    {% else %}
+        {# No glyphicon to be displayed. #}
+        <li>{{ value }}</li>
+    {% endif %}
+{% endmacro %}
+
+{# Iterates over each configuration menu items, and recursively calls itself for grouped items #}
+{% macro list_items(menu_items) %}
+    {# Import the other macros defined in this template as well as the current macro itself (for recursive calls). #}
+    {% import _self as menu_utils %}
+
+    {# The configuration menu items should have the following properties:
+    - 'route' and 'name'. The 'route' will be be automatically translated to a URL.
+        Optionally also a 'route_params' property can be passed.
+    or
+    - 'url' and 'name'. The 'url' needs to be properly encoded.
+    - 'name'. No URL will be displayed.
+    Optionally also a 'glyphicon' property can be specified, which should be a bootstrap glyphicon class name.
+    It is also possible to group several menu items together by adding them to an object with:
+    - 'group' property which contains an array of configuration menu items; 'groupClass' an additional class to be added to the group element.
+    #}
+    {% if menu_items|default and menu_items is iterable %}
+        {# This is an array of menu items. #}
+        {% for menu_item in menu_items %}
+            {% if menu_item.group|default %}
+                {# Got a group of menu items. Recursively call the current function to list them separately #}
+                <li>
+                    <ul class="menu-item-group{{ menu_item.groupClass|default ? ' ' ~ menu_item.groupClass }}">
+                        {{ menu_utils.list_items(menu_item.group) }}
+                    </ul>
+                </li>
+            {% elseif menu_item.route|default %}
+                {# got a route #}
+                {{ menu_utils.list_url_item(path(menu_item.route, menu_item.route_params|default({})), menu_item.name|default, menu_item.glyphicon|default) }}
+            {% elseif menu_item.url|default %}
+                {# got a URL #}
+                {{ menu_utils.list_url_item(menu_item.url, menu_item.name|default, menu_item.glyphicon|default) }}
+            {% elseif menu_item.name|default %}
+                {# No URL or route but got some static content to be displayed #}
+                {{ menu_utils.list_regular_item(menu_item.name, menu_item.glyphicon|default) }}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        There are no items to be displayed.
+    {% endif %}
+
+{% endmacro %}
+
+{# Register the macros for use in the current template #}
+{% import _self as menu_utils %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    <div class="row">
+        <nav>
+            <ul class="configuration-menu">
+                {% block configuration_menu %}
+                    {{ menu_utils.list_items(configuration_menu_items|default) }}
+                {% endblock %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

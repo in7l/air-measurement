@@ -1,0 +1,89 @@
+services:
+    data_consolidation.custom_nodes.doctrine_entity_helper:
+        class: DataConsolidation\CustomNodesBundle\Utils\DoctrineEntityHelper
+        calls:
+            - [ setContainer, [@service_container]]
+    data_consolidation.custom_nodes.doctrine_entity_mapping_helper:
+            class: DataConsolidation\CustomNodesBundle\Utils\DoctrineEntityMappingHelper
+            calls:
+                - [ setContainer, [@service_container]]
+    data_consolidation.custom_nodes.random_data_generator:
+        class: DataConsolidation\CustomNodesBundle\Utils\RandomDataGenerator
+        calls:
+            - [ setContainer, [@service_container]]
+    data_consolidation.custom_nodes.database_schema_importer:
+        class: DataConsolidation\CustomNodesBundle\Utils\DatabaseSchemaImporter
+    data_consolidation.custom_nodes.form.type.node_config:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\NodeConfigFormType
+        arguments: ['@data_consolidation.database_configurator']
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.diagram_config:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\DiagramConfigFormType
+        arguments: ['@data_consolidation.database_configurator']
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.select_target_diagram:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\SelectTargetDiagramFormType
+        arguments: ['@data_consolidation.custom_nodes.doctrine_entity_helper']
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.select_data_source_entity:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\SelectDataSourceEntityFormType
+        arguments: ['@data_consolidation.custom_nodes.doctrine_entity_helper']
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.define_field_mappings:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\DefineFieldMappingsFormType
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.field_mapping:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\FieldMappingFormType
+        arguments: ['@data_consolidation.custom_nodes.doctrine_entity_helper']
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.define_json_field_mappings:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\DefineJsonFieldMappingsFormType
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.json_field_mapping:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\JsonFieldMappingFormType
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    data_consolidation.custom_nodes.form.type.enter_json_data_source:
+        class: DataConsolidation\CustomNodesBundle\Form\Type\EnterJsonDataSourceFormType
+        # The tags are needed in order to properly obtain the service, instead of creating a new form object each time it is needed.
+        tags:
+            - { name: form.type }
+    # Form flow (wizard) for importing database schemas as node configs.
+    data_consolidation.custom_nodes.form.flow.import_database_schema:
+        class: DataConsolidation\CustomNodesBundle\Form\Flow\ImportDatabaseSchemaFlow
+        parent: craue.form.flow
+        calls:
+            - [ setContainer, [@service_container]]
+    # Form flow (wizard) for creating diagram configs.
+    data_consolidation.custom_nodes.form.flow.diagram:
+        class: DataConsolidation\CustomNodesBundle\Form\Flow\DiagramFlow
+        parent: craue.form.flow
+        calls:
+            - [ setContainer, [@service_container]]
+    # Form flow (wizard) for creating data source to diagram mappings.
+    data_consolidation.custom_nodes.form.flow.data_source_to_diagram_mapping:
+        class: DataConsolidation\CustomNodesBundle\Form\Flow\DataSourceToDiagramMappingFlow
+        parent: craue.form.flow
+        calls:
+            - [ setContainer, [@service_container]]
+    # Form flow (wizard) for creating JSON to diagram mappings.
+    data_consolidation.custom_nodes.form.flow.json_to_diagram_mapping:
+        class: DataConsolidation\CustomNodesBundle\Form\Flow\JsonToDiagramMappingFlow
+        parent: craue.form.flow
+        calls:
+            - [ setContainer, [@service_container]]

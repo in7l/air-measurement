@@ -1,0 +1,9 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    # data source databases
+    data_source.db_1.driver: pdo_mysql
+    data_source.db_1.host: 127.0.0.1
+    data_source.db_1.port: ~
+    data_source.db_1.dbname: symfony
+    data_source.db_1.user: root
+    data_source.db_1.password: ~

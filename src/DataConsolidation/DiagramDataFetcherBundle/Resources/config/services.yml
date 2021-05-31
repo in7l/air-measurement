@@ -1,0 +1,4 @@
+services:
+#    data_consolidation_diagram_data_fetcher.example:
+#        class: DataConsolidation\DiagramDataFetcherBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,10 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Custom nodes configuration' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [
+    {'route': 'data_consolidation.custom_nodes.data_source.index', 'name': 'Configure data source nodes'},
+    {'route': 'data_consolidation.custom_nodes.diagram.index', 'name': 'Configure diagrams'},
+    {'route': 'data_consolidation.custom_nodes.data_source_to_diagram_mapping.index', 'name': 'Data source to diagram mappings', 'glyphicon': 'glyphicon-sort'},
+] %}

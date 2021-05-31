@@ -1,0 +1,18 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Diagrams' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [] %}
+{# Gp through each item in the custom node configurations and display it as a menu item link #}
+{% for entityManager, diagramNames in diagram_entities_info %}
+    {% for diagramName in diagramNames %}
+        {# Display the name as just the diagram name if this is the default entity manager. Otherwise put the entity manager name in parenthesis. #}
+        {% set configuration_menu_items = configuration_menu_items|merge([
+        {
+            'url': "#{ path('data_consolidation.diagram_data_fetcher.show_diagram', {'sanitized_entity_manager_name': entityManager, 'entity_name': diagramName}) }",
+            'name': "#{ diagramName ~ (entityManager|default != 'DefaultEntityManager' ? ' (' ~ entityManager ~ ')')}"
+        }
+        ]) %}
+    {% endfor %}
+{% endfor %}

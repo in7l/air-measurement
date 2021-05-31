@@ -1,0 +1,135 @@
+{% extends ':default:form.html.twig' %}
+
+{% set page_title = 'Air quality conditions' %}
+
+{% block form_block %}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+
+		<div>
+			{{ form_label(form.sensorId) }}
+			{{ form_errors(form.sensorId) }}
+			{{ form_widget(form.sensorId) }}
+		</div>
+
+		<div class="col-xs-12 col-sm-6">
+			<header>
+				<h3>Good quality conditions</h3>
+			</header>
+
+			<table class="table">
+				<tr>
+					<th>Field</th>
+					<th>Operator</th>
+					<th>Value</th>
+					<th></th>
+				</tr>
+
+				<tr>
+					<td>{{ form_label(form.goodMeasureNMin, 'n') }}</td>
+					<td>{{ form_widget(form.goodMeasureNMinInclusive) }}</td>
+					<td>{{ form_widget(form.goodMeasureNMin) }}</td>
+					<td>{{ form_errors(form.goodMeasureNMinInclusive) }}
+					{{ form_errors(form.goodMeasureNMin) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.goodMeasureNMax, 'n') }}</td>
+					<td>{{ form_widget(form.goodMeasureNMaxInclusive) }}</td>
+					<td>{{ form_widget(form.goodMeasureNMax) }}</td>
+					<td>{{ form_errors(form.goodMeasureNMaxInclusive) }}
+					{{ form_errors(form.goodMeasureNMax) }}</td>
+				</tr>
+
+				<tr>
+					<td>{{ form_label(form.goodMeasurePaMin, 'pa') }}</td>
+					<td>{{ form_widget(form.goodMeasurePaMinInclusive) }}</td>
+					<td>{{ form_widget(form.goodMeasurePaMin) }}</td>
+					<td>{{ form_errors(form.goodMeasurePaMinInclusive) }}
+					{{ form_errors(form.goodMeasurePaMin) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.goodMeasurePaMax, 'pa') }}</td>
+					<td>{{ form_widget(form.goodMeasurePaMaxInclusive) }}</td>
+					<td>{{ form_widget(form.goodMeasurePaMax) }}</td>
+					<td>{{ form_errors(form.goodMeasurePaMaxInclusive) }}
+					{{ form_errors(form.goodMeasurePaMax) }}</td>
+				</tr>
+
+				<tr>
+					<td>{{ form_label(form.goodMeasureMgMin, 'mg') }}</td>
+					<td>{{ form_widget(form.goodMeasureMgMinInclusive) }}</td>
+					<td>{{ form_widget(form.goodMeasureMgMin) }}</td>
+					<td>{{ form_errors(form.goodMeasureMgMinInclusive) }}
+					{{ form_errors(form.goodMeasureMgMin) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.goodMeasureMgMax, 'mg') }}</td>
+					<td>{{ form_widget(form.goodMeasureMgMaxInclusive) }}</td>
+					<td>{{ form_widget(form.goodMeasureMgMax) }}</td>
+					<td>{{ form_errors(form.goodMeasureMgMaxInclusive) }}
+					{{ form_errors(form.goodMeasureMgMax) }}</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="col-xs-12 col-sm-6">
+			<header>
+				<h3>Fair quality conditions</h3>
+			</header>
+
+			<table class="table">
+				<tr>
+					<th>Field</th>
+					<th>Operator</th>
+					<th>Value</th>
+					<th></th>
+				</tr>
+
+				<tr>
+					<td>{{ form_label(form.fairMeasureNMin, 'n') }}</td>
+					<td>{{ form_widget(form.fairMeasureNMinInclusive) }}</td>
+					<td>{{ form_widget(form.fairMeasureNMin) }}</td>
+					<td>{{ form_errors(form.fairMeasureNMinInclusive) }}
+					{{ form_errors(form.fairMeasureNMin) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.fairMeasureNMax, 'n') }}</td>
+					<td>{{ form_widget(form.fairMeasureNMaxInclusive) }}</td>
+					<td>{{ form_widget(form.fairMeasureNMax) }}</td>
+					<td>{{ form_errors(form.fairMeasureNMaxInclusive) }}
+					{{ form_errors(form.fairMeasureNMax) }}</td>
+				</tr>
+
+				<tr>
+					<td>{{ form_label(form.fairMeasurePaMin, 'pa') }}</td>
+					<td>{{ form_widget(form.fairMeasurePaMinInclusive) }}</td>
+					<td>{{ form_widget(form.fairMeasurePaMin) }}</td>
+					<td>{{ form_errors(form.fairMeasurePaMinInclusive) }}
+					{{ form_errors(form.fairMeasurePaMin) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.fairMeasurePaMax, 'pa') }}</td>
+					<td>{{ form_widget(form.fairMeasurePaMaxInclusive) }}</td>
+					<td>{{ form_widget(form.fairMeasurePaMax) }}</td>
+					<td>{{ form_errors(form.fairMeasurePaMaxInclusive) }}
+					{{ form_errors(form.fairMeasurePaMax) }}</td>
+				</tr>
+
+				<tr>
+					<td>{{ form_label(form.fairMeasureMgMin, 'mg') }}</td>
+					<td>{{ form_widget(form.fairMeasureMgMinInclusive) }}</td>
+					<td>{{ form_widget(form.fairMeasureMgMin) }}</td>
+					<td>{{ form_errors(form.fairMeasureMgMinInclusive) }}
+					{{ form_errors(form.fairMeasureMgMin) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.fairMeasureMgMax, 'mg') }}</td>
+					<td>{{ form_widget(form.fairMeasureMgMaxInclusive) }}</td>
+					<td>{{ form_widget(form.fairMeasureMgMax) }}</td>
+					<td>{{ form_errors(form.fairMeasureMgMaxInclusive) }}
+					{{ form_errors(form.fairMeasureMgMax) }}</td>
+				</tr>
+			</table>
+		</div>
+	{{ form_end(form) }}
+{% endblock %}

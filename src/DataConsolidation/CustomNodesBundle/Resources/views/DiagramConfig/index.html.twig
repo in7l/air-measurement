@@ -1,0 +1,10 @@
+{% extends ':default:configuration_menu.html.twig' %}
+
+{% set page_title = 'Diagrams configuration' %}
+
+{# Add menu item links to be displayed #}
+{% set configuration_menu_items = [
+    {'route': 'data_consolidation.custom_nodes.diagram.add', 'name': 'Add a new diagram configuration', 'glyphicon': 'glyphicon-plus'},
+    {'route': 'data_consolidation.custom_nodes.diagram.list', 'name': 'View existing diagram configurations', 'glyphicon': 'glyphicon-wrench'},
+    {'route': 'data_consolidation.custom_nodes.generated_entities.list', 'route_params': {'entity_type': 'diagram'}, 'name': 'View generated doctrine entities', 'glyphicon': 'glyphicon-list-alt'},
+] %}

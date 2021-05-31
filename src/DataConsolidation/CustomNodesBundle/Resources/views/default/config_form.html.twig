@@ -1,0 +1,78 @@
+{% extends ':default:form.html.twig' %}
+
+{# Macro for printing a config field embedded form #}
+{% macro config_field_form_row(configField) %}
+    <div class="form-group field-group">
+        {% for key, configFieldElement in configField %}
+            {# The options sub-element should be rendered in its own fieldset #}
+            {% if key == 'options' %}
+                {# Render the options label, although that may be hidden. The point is that the layout is preserved as if the label was placed there #}
+                {{ form_label(configFieldElement) }}
+                <fieldset class="fieldset-border fieldset-options">
+                    <legend class="options-legend"><span class="glyphicon glyphicon-expand"></span> Options:</legend>
+                    {# Add an escaped data-prototype used for adding more fields dynamically #}
+                    <div class="config-field-options">
+                        {{ form_row(configFieldElement) }}
+                    </div>
+                </fieldset>
+            {% else %}
+                {{ form_row(configFieldElement) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{# Macro for printing a target entity manager field #}
+{% macro config_target_entity_manager_form_row(entityManagerField) %}
+    <div class="form-group target-entity-manager-group">
+        {{ form_errors(entityManagerField) }}
+        {{ form_widget(entityManagerField) }}
+    </div>
+{% endmacro %}
+
+{# Macro for printing a node config form. It is allowed that the actual node config is a child element of the passed argument. #}
+{% macro config_form(nodeConfigForm) %}
+    {% if nodeConfigForm is iterable %}
+        {% for key, formElement in nodeConfigForm.children %}
+            {% if key == 'nodeConfig' %}
+                {# The actual node config form is a nested element. Recursively call this macro. #}
+                {{ _self.config_form(formElement) }}
+            {% elseif key == 'targetEntityManagers' %}
+                <fieldset class="fieldset-border">
+                    <legend>Target entity managers:</legend>
+                    {# Add an escaped data-prototype used for adding more fields dynamically #}
+                    <div id="config-target-entity-managers" class="config-embedded-form" data-prototype="{{ _self.config_target_entity_manager_form_row(formElement.vars.prototype)|e }}">
+                        {% for entityManager in formElement %}
+                            {{ _self.config_target_entity_manager_form_row(entityManager) }}
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            {% elseif key == 'fields' %}
+                <fieldset class="fieldset-border">
+                    <legend>Fields:</legend>
+                    {# Add an escaped data-prototype used for adding more fields dynamically #}
+                    <div id="config-fields" class="config-embedded-form" data-prototype="{{ _self.config_field_form_row(formElement.vars.prototype)|e }}">
+                        {% for configField in formElement %}
+                            {{ _self.config_field_form_row(configField) }}
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            {% else %}
+                {{ form_row(formElement) }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{# Import the macros for use in the current template #}
+{% import _self as forms %}
+
+{% block form_elements %}
+    {{ forms.config_form(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# Used for adding and removing additional node config field forms. #}
+    <script src="{{ asset('site/js/node_config.js') }}"></script>
+{% endblock %}

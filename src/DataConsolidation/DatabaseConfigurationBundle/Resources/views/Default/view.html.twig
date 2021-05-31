@@ -1,0 +1,15 @@
+{% extends ':default:layout.html.twig' %}
+
+{% set page_title = 'Database connection configuration: ' ~ database_configuration.connectionAlias %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    <p>
+        Driver: {{ database_configuration.driver }}<br>
+        Host: {{ database_configuration.host }}<br>
+        Port: {{ (database_configuration.port is not null) ? database_configuration.port : 'default' }}<br>
+        Database name: {{ database_configuration.dbName }}<br>
+        User: {{ database_configuration.user }}<br>
+        Using password: {{ (database_configuration.password is not null) ? 'Yes' : 'No' }}
+    </p>
+{% endblock %}

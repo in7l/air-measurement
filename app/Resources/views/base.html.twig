@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        {% block metatags %}{% endblock %}
+        <title>
+            {% block title %}
+                {# Include a custom page title if it was set #}
+                {% if page_title is defined %}
+                    {{ page_title }}
+                {% else %}
+                    Welcome!
+                {% endif %}
+            {% endblock %}
+        </title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

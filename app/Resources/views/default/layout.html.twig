@@ -1,0 +1,114 @@
+{% extends ':default:bootstrap_base.html.twig' %}
+
+{% block metatags %}
+    {{  parent()  }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block stylesheets %}
+    {{  parent() }}
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('site/css/style.css') }}">
+{% endblock %}
+
+{% block bootstrap_navbar %}
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% block bootstrap_navbar_header %}
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">{{ site_name }}</a>
+            {% endblock %}
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% block bootstrap_navbar_collapse %}
+
+            <ul class="nav navbar-nav">
+                {% block bootstrap_navbar_left %}
+                    {#<li{{ (app.request.attributes.get('_route') == 'air_measurement_diagram_simple_status') ? ' class="active"' }}><a href="{{ path('air_measurement_diagram_simple_status') }}">Status</a></li>#}
+                    <li{{ (app.request.attributes.get('_route') == 'data_consolidation.diagram_data_fetcher.list') ? ' class="active"' }}><a href="{{ path('data_consolidation.diagram_data_fetcher.list') }}">Diagrams</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li{{ (app.request.attributes.get('_route') == 'air_measurement_admin_action_list') ? ' class="active"' }}><a href="{{ path('air_measurement_admin_action_list') }}">Administrative panel</a></li>
+                    {% endif %}
+                {% endblock %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% block bootstrap_navbar_right %}
+                    {% block user_auth %}
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li{{ (app.request.attributes.get('_route') == 'fos_user_security_login') ? ' class="active"' }}><a href="{{ path('fos_user_security_login') }}">Log in</a></li>
+                            <li{{ (app.request.attributes.get('_route') == 'fos_user_registration_register') ? ' class="active"' }}><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                        {% else %}
+                            <li{{ (app.request.attributes.get('_route') == 'fos_user_profile_show') ? ' class="active"' }}><a href="{{ path('fos_user_profile_show') }}">Logged in as <span class="bold">{{ app.user.username }}</span>.</a></li>
+                            <li{{ (app.request.attributes.get('_route') == 'fos_user_security_logout') ? ' class="active"' }}><a href="{{ path('fos_user_security_logout') }}">Log out</a></li>
+                        {% endif %}
+                    {% endblock %}
+                {% endblock %}
+            </ul>
+        </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block bootstrap_container %}
+    {% block page_header %}
+        {% block flash_message_block %}
+            {# Print flash notices #}
+            {% for flash_message in app.session.flashbag.get('notice') %}
+                <div class="flash-message flash-notice">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {# Print flash warnings #}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="flash-message flash-warning">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {# Print flash errors #}
+            {% for flash_message in app.session.flashbag.get('error') %}
+                <div class="flash-message flash-error">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+        <header class="page-header" id="page-title">
+            <h1>
+                {% block page_header_content %}
+                    {# Include a custom page title if it was set #}
+                    {% if page_title is defined %}
+                        {{ page_title }}
+                    {% else %}
+                        Page title
+                    {% endif %}
+                {% endblock %}
+            </h1>
+        </header>
+        {% block tabs %}
+            {# Display optional nav-tabs #}
+            {% if tab_items|default and tab_items is iterable %}
+                <ul class="nav nav-tabs">
+                    {% for tab_item in tab_items %}
+                        <li {{ tab_item.active|default ? 'class="active"' }}>
+                            {% if tab_item.route|default %}
+                                {# got a route #}
+                                <a href="{{ path(tab_item.route) }}">{{ tab_item.name|default }}</a>
+                            {% elseif tab_item.url|default %}
+                                {# got a URL #}
+                                <a href="{{ tab_item.url }}">{{ tab_item.name|default }}</a>
+                            {% else %}
+                                {# No valid link, just text #}
+                                {{ tab_item.name|default }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}

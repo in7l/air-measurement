@@ -1,0 +1,3 @@
+parameters:
+    # Maximum number of content list entries to be shown per page.
+    content_list_entries_per_page: 20

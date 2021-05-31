@@ -1,0 +1,38 @@
+{% extends ':default:layout.html.twig' %}
+
+{% set page_title = 'Data source to diagram mapping: ' ~ data_source_to_diagram_mapping.getShortName() %}
+
+{% block bootstrap_container %}
+    {{ parent() }}
+    <p>
+        ID: {{ data_source_to_diagram_mapping.id }}<br>
+        Short name: {{ data_source_to_diagram_mapping.getShortName() }}<br>
+        Target diagram:
+        {# Display a link to the generated diagram doctrine entity if possible. #}
+        {% if diagram_entity_route_params is not null %}
+            <a href="{{ path('data_consolidation.custom_nodes.generated_entities.view', diagram_entity_route_params) }}">{{ data_source_to_diagram_mapping.diagram }}</a>
+        {% else %}
+            {{ data_source_to_diagram_mapping.diagram }}
+        {% endif %}
+        <br>
+
+        Data source:
+        {# Display a link to the generated data source doctrine entity if possible. #}
+        {% if data_source_entity_route_params is not null %}
+            <a href="{{ path('data_consolidation.custom_nodes.generated_entities.view', data_source_entity_route_params) }}">{{ data_source_to_diagram_mapping.dataSource }}</a>
+        {% else %}
+            {{ data_source_to_diagram_mapping.dataSource }}
+        {% endif %}
+        <br>
+    </p>
+    <h4>Field mappings:</h4>
+    <ul>
+        {% for fieldMapping in data_source_to_diagram_mapping.fieldMappings %}
+            <li>Field mapping id: {{ fieldMapping.id }}<ul>
+                    <li>Target diagram getter: {{ fieldMapping.targetGetter }}</li>
+                    <li>Target diagram setter: {{ fieldMapping.targetSetter }}</li>
+                    <li>Data source getter: {{ fieldMapping.sourceGetter|default('NONE') }}</li>
+            </ul></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,4 @@
+services:
+#    air_measurement_admin.example:
+#        class: AirMeasurement\AdminBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

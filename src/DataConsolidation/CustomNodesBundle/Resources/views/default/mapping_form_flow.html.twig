@@ -1,0 +1,20 @@
+{% extends 'DataConsolidationCustomNodesBundle:default:mapping_form.html.twig' %}
+
+{% block pre_form_block %}
+    {{ parent() }}
+    <div class="row form-flow-steps">
+        Steps:
+        {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block form_submit_block %}
+    {% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@CraueFormFlowBundle/Resources/assets/css/buttons.css' %}
+    <link type="text/css" rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
